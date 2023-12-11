@@ -1,1 +1,26 @@
+// Source: https://usaco.guide/general/io
+//creating an array of the amount of buckets you need for every point in time, then just returning largest one
+#include <bits/stdc++.h>
+using namespace std;
 
+int n;
+int blist[1000]; 
+int s, t, b;
+int main() {
+	ofstream fout("blist.out");
+	ifstream fin("blist.in");
+	fin >> n;
+	fill_n(blist, n, 0);
+	for(int i = 0; i < n; i++){
+		fin >> s >> t >> b;
+		for(int j = s - 1; j < t; j++){
+			blist[j]+=b;
+		}
+	}
+	int maxN = 0;
+	for(int i = 0; i < 1000; i++){
+		maxN = max(maxN, blist[i]);
+	}
+	fout << maxN;
+
+}
