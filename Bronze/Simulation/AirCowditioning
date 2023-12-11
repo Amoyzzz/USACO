@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-//Creating an array of length d that is the difference between the current and goal temperatures. Then stimulating to try to make d[i] == 0
-
-
+// the better way to do this was to recognize that when listing all of the values of d, and then putting 0 in front of the array and 0 in the back. Taking half of the sum of all of the differences with d[i] and d[i + 1] would give the same answer. Read the editorial on 2021 December Bronze 2. Air Cownditioning if confused
 int main() {
 	int N;
 	cin >> N;
@@ -16,18 +14,18 @@ int main() {
 	int first_nonzero = 0, ans = 0;
 	while (true) {
 		while (first_nonzero < N && d[first_nonzero] == 0)
-			++first_nonzero;
+			++first_nonzero; // calculating the point of the first non zero number
 		if (first_nonzero == N)
-			break;
-		int r = first_nonzero;
-		auto sgn = [&](int x) {
+			break; // meaning that if all of the numbers are 0, then stop
+		int r = first_nonzero; // easier way to write it i guess?
+		auto sgn = [&](int x) { // what in the world is this
 			if (x < 0)
 				return -1;
 			if (x > 0)
 				return 1;
 			return 0;
 		};
-		while (r + 1 < N && sgn(d[r + 1]) == sgn(d[first_nonzero]))
+		while (r + 1 < N && sgn(d[r + 1]) == sgn(d[first_nonzero])) // lost me here
 			++r;
 		for (int i = first_nonzero; i <= r; ++i) {
 			if (d[i] < 0)
